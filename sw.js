@@ -1,5 +1,5 @@
 /* 아파트 시세 트래킹 PWA 서비스워커 — 오프라인 캐시 */
-const CACHE = "apt-tracker-v1";
+const CACHE = "apt-tracker-v2";
 const SHELL = ["./", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png"];
 
 self.addEventListener("install", (e) => {
@@ -20,7 +20,7 @@ self.addEventListener("fetch", (e) => {
   // HTML(내비게이션): 네트워크 우선 → 실패 시 캐시 (최신 데이터 우선, 오프라인 대비)
   if (req.mode === "navigate") {
     e.respondWith(
-      fetch(req)
+      fetch(req, { cache: "no-store" }) // HTML은 항상 최신으로 (캐시 우회)
         .then((res) => { const cl = res.clone(); caches.open(CACHE).then((c) => c.put("./", cl)); return res; })
         .catch(() => caches.match(req).then((m) => m || caches.match("./")))
     );
