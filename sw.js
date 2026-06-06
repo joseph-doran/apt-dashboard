@@ -1,5 +1,5 @@
 /* 아파트 시세 트래킹 PWA 서비스워커 — 오프라인 캐시 */
-const CACHE = "apt-tracker-v2";
+const CACHE = "apt-tracker-v3";
 const SHELL = ["./", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png"];
 
 self.addEventListener("install", (e) => {
